@@ -4,17 +4,14 @@ import com.qamp.placelab.utills.WebDriverSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class LoginWithInvalidPassword {
     private WebDriver driver;
 
     @Parameters("browser")
     @BeforeTest
-    public void setup(final String browser) {
+    public void setup(@Optional("chrome")final String browser) {
         driver = WebDriverSetup.getWebDriver(browser);
         driver.get("https://demo.placelab.com/");
         System.out.println("You opened  browser " + browser);
@@ -22,27 +19,17 @@ public class LoginWithInvalidPassword {
 
     @Parameters()
     @Test
-    public void loginWithValidEmailPassword() {
+    public void loginWithInValidEmailPassword() {
         Assert.assertTrue(
                 driver.findElement(By.id("login_form")).isDisplayed(),
                 "Validate login from is displayed"
         );
 
         //enter a email
-        driver.findElement(By.id("email")).sendKeys("ahmedberbic2000@gmail.com");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        driver.findElement(By.id("email")).sendKeys("test@gmail.com");
 
         //enter a password
         driver.findElement(By.id("password")).sendKeys("123456");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
         //submit
         driver.findElement(By.name("commit")).click();
@@ -59,7 +46,7 @@ public class LoginWithInvalidPassword {
         );
         Assert.assertTrue(
                 driver.findElement(By.id("login_form")).isDisplayed(),
-                "Validate login form is still displayed and we can try again"
+                "Validate login form is still displayed and user can try again"
         );
         try {
             Thread.sleep(3000);

@@ -5,23 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class TermsOfUseFunctionality {
     private WebDriver driver;
 
     @Parameters("browser")
     @BeforeTest
-    public void setup(final String browser) {
+    public void setup(@Optional("chrome") final String browser) {
         driver = WebDriverSetup.getWebDriver(browser);
         driver.get("https://demo.placelab.com/");
         System.out.println("You opened  browser " + browser);
     }
 
-    @Parameters()
+
     @Test
     public void termsOfUseTest() {
         final String expectedTermsOfUseLink = "https://demo.placelab.com/terms_of_service";

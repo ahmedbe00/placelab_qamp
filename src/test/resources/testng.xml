@@ -3,12 +3,15 @@
 
 <suite name="Smoke suite" verbose="1" >
     <test name="Placelab Smoke Tests" >
+        <parameter name="browser" value="chrome"/>
+
         <classes>
-            <class name="com.qamp.placelab.test.SmokeTest" />
-            <class name="com.qamp.placelab.test.LoginWithInvalidPassword" />
+
             <class name="com.qamp.placelab.test.LoginWithValidCredentials" />
-            <class name="com.qamp.placelab.test.ForgotYourPasswordFunctionality" />
+            <class name="com.qamp.placelab.test.LoginWithInvalidPassword" />
             <class name="com.qamp.placelab.test.TermsOfUseFunctionality" />
+            <class name="com.qamp.placelab.test.ForgotYourPasswordFunctionality" />
+
         </classes>
     </test>
 </suite>
