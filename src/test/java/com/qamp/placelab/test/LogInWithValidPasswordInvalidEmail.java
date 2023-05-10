@@ -8,7 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-public class LoginWithValidCredentials {
+import java.util.UUID;
+
+public class LogInWithValidPasswordInvalidEmail {
     private WebDriver driver;
     private SoftAssert softAssert = new SoftAssert();
     private LoginPage loginPage;
@@ -22,37 +24,30 @@ public class LoginWithValidCredentials {
         this.loginPage = new LoginPage(driver);
     }
 
-    @Parameters({"email", "password"})
-    @Test(description = "User is  able to log in with valid credentials ")
-    public void loginWithValidEmailPassword(final String email, final String password) {
+    @Parameters("password")
+    @Test(description = "User is not able to log in with invalid credentials ")
+    public void loginWithInValidEmailPassword(final String password) {
 
         //validate log in page
         loginPage.validateLogInPageContent();
 
         //enter credentials
-        loginPage.enterCredentials(email, password);
+        final String randomEmail = UUID.randomUUID().toString();
+        loginPage.enterCredentials(randomEmail, password);
+
+        //verify that user can't log in with Invalid password
+        loginPage.validateErrorMessage();
+        loginPage.validateLogInPageContent();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        // verify user role
-        final String expectedAdminUserRole = "Group Admin";
-        final String actualUserRole = driver.findElement(By.id("user-role")).getText();
-        Assert.assertEquals(actualUserRole, expectedAdminUserRole, "Validate user Role for logged user");
-
-        //logout
-        loginPage.logout();
-
     }
+
 
     @AfterTest
     public void teardown() {
         driver.close();
     }
 }
-
-/* <class name="com.qamp.placelab.test.LoginWithInvalidPassword" />
-            <class name="com.qamp.placelab.test.TermsOfUseFunctionality" />
-            <class name="com.qamp.placelab.test.ForgotYourPasswordFunctionality" /> */

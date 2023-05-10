@@ -6,12 +6,14 @@
         <parameter name="browser" value="chrome"/>
 
         <classes>
-
+            <class name="com.qamp.placelab.test.CreateSinglePlaceSearchReportWithMaps" />
+            <class name="com.qamp.placelab.test.CreateSinglePlaceSearchReportWithAddress" />
+            <class name="com.qamp.placelab.test.LogInWithValidPasswordInvalidEmail" />
+            <class name="com.qamp.placelab.test.LoginWithValidEmailInvalidPassword" />
             <class name="com.qamp.placelab.test.LoginWithValidCredentials" />
-            <class name="com.qamp.placelab.test.LoginWithInvalidPassword" />
-            <class name="com.qamp.placelab.test.TermsOfUseFunctionality" />
             <class name="com.qamp.placelab.test.ForgotYourPasswordFunctionality" />
 
         </classes>
+
     </test>
 </suite>
