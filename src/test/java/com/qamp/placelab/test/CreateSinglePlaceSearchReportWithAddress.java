@@ -3,6 +3,7 @@ package com.qamp.placelab.test;
 import com.qamp.placelab.pages.CreateSinglePlaceSearchPage;
 import com.qamp.placelab.pages.HomePage;
 import com.qamp.placelab.pages.LoginPage;
+import com.qamp.placelab.pages.ReportsPage;
 import com.qamp.placelab.utills.WebDriverSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ public class CreateSinglePlaceSearchReportWithAddress {
     private WebDriver driver;
     private LoginPage loginPage;
     private HomePage homePage;
+    private ReportsPage reportsPage;
     private CreateSinglePlaceSearchPage createSinglePlaceSearchPage;
     @Parameters({"browser", "email", "password"})
     @BeforeTest
@@ -54,6 +56,12 @@ public class CreateSinglePlaceSearchReportWithAddress {
 
         //again validate home page ( with that we knows that Report is successfully created)
         homePage.validateHomePageContent();
+
+       /* homePage.goToReportsPage();
+        reportsPage.validateReportsPageElements();
+       reportsPage.openReport(reportTitle);
+        reportsPage.deleteReport(reportTitle); */
+
 
         //logout
         loginPage.logout();

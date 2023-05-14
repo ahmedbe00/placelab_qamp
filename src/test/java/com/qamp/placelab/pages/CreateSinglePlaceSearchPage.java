@@ -6,7 +6,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class CreateSinglePlaceSearchPage {
     private final static By PLACELAB_LOGO = By.xpath("/html/body/div[2]/div[1]/div/a/img");
@@ -25,9 +29,6 @@ public class CreateSinglePlaceSearchPage {
     private final static By CREATE_REPORT_BUTTON = By.xpath("//*[@id=\"single_poi_query\"]/button");
     private final static By RADIO_BUTTON_ACCOMMODATION = By.xpath("//*[@id=\"single_poi_query\"]/div[3]/div[2]/div/ul/div/li[2]/a/label");
     private final static By YES_BUTTON = By.xpath("/html/body/div[10]/div[3]/div/button[1]");
-
-
-
 
     private final WebDriver driver;
 
@@ -65,20 +66,15 @@ public class CreateSinglePlaceSearchPage {
         Assert.assertTrue(
                 driver.findElement(CREATE_REPORT_BUTTON).isDisplayed(), "Validate that create button is displayed");
 
-
-
     }
     public void enterCredentialsByAddress(){
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         driver.findElement(REPORT_NAME).sendKeys("Malak Regency Hotel, Sarajevo");
         driver.findElement(PLACE_NAME).sendKeys("Ilidža");
         driver.findElement(CATEGORY_DROPDOWN_BUTTON).click();
         driver.findElement(RADIO_BUTTON_ACCOMMODATION).click();
         driver.findElement(LOCATION_NAME).sendKeys("R8F5+7H5, Hrasnička cesta bb, Ilidža 71210");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"single_poi_query\"]/div[4]/div[1]/div/ul/li[1]/a")));
         driver.findElement(By.xpath("//*[@id=\"single_poi_query\"]/div[4]/div[1]/div/ul/li[1]/a")).click();
         Assert.assertTrue(
                 driver.findElement(YES_BUTTON).isDisplayed(),"Validate that YES button is displayed");
@@ -103,7 +99,5 @@ public class CreateSinglePlaceSearchPage {
         // with Yes and NO button is not present, so that is the error and i can't find solution.
 
         driver.findElement(CREATE_REPORT_BUTTON).click();
-
     }
-
 }

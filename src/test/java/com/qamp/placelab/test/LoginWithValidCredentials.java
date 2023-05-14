@@ -1,5 +1,6 @@
 package com.qamp.placelab.test;
 
+import com.qamp.placelab.pages.HomePage;
 import com.qamp.placelab.pages.LoginPage;
 import com.qamp.placelab.utills.WebDriverSetup;
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ public class LoginWithValidCredentials {
     private WebDriver driver;
     private SoftAssert softAssert = new SoftAssert();
     private LoginPage loginPage;
+    private HomePage homePage;
 
     @Parameters("browser")
     @BeforeTest
@@ -38,9 +40,8 @@ public class LoginWithValidCredentials {
         }
 
         // verify user role
-        final String expectedAdminUserRole = "Group Admin";
-        final String actualUserRole = driver.findElement(By.id("user-role")).getText();
-        Assert.assertEquals(actualUserRole, expectedAdminUserRole, "Validate user Role for logged user");
+        this.homePage=new HomePage(driver);
+        homePage.validateHomePageContent();
 
         //logout
         loginPage.logout();
@@ -53,6 +54,3 @@ public class LoginWithValidCredentials {
     }
 }
 
-/* <class name="com.qamp.placelab.test.LoginWithInvalidPassword" />
-            <class name="com.qamp.placelab.test.TermsOfUseFunctionality" />
-            <class name="com.qamp.placelab.test.ForgotYourPasswordFunctionality" /> */

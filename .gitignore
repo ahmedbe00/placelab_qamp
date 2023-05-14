@@ -8,6 +8,8 @@ target/
 
 .iml/
 
+.placelab_qamp.iml
+
 
 ### Eclipse ###
 .apt_generated

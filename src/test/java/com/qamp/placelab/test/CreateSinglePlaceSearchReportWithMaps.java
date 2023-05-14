@@ -58,6 +58,11 @@ public class CreateSinglePlaceSearchReportWithMaps {
             //again validate home page ( with that we knows that Report is successfully created)
             homePage.validateHomePageContent();
 
+             /* homePage.goToReportsPage();
+        reportsPage.validateReportsPageElements();
+       reportsPage.openReport(reportTitle);
+        reportsPage.deleteReport(reportTitle); */
+
             //logout
             loginPage.logout();
 

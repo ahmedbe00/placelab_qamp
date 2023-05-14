@@ -3,7 +3,10 @@ package com.qamp.placelab.pages;
 import com.sun.jdi.PrimitiveValue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class LoginPage {
     private final static By LOGIN_FORM = By.id("login_form");
@@ -14,7 +17,8 @@ public class LoginPage {
     private final static By DROP_DOWN_BUTTON = By.cssSelector("#user-name > i");
     private final static By SIGN_OUT_BUTTON = By.xpath(".//a[text()='Sign out']");
     private final static By ERROR_MESSAGE = By.xpath("//div[@class='error-area']");
-    private final WebDriver driver;
+    private final WebDriver driver ;
+
 
     public LoginPage(final WebDriver webDriver) {
         this.driver = webDriver;
@@ -47,11 +51,6 @@ public class LoginPage {
                 "Validate drop down button is displayed");
         driver.findElement(DROP_DOWN_BUTTON).click();
         driver.findElement(SIGN_OUT_BUTTON).click();
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
     public  void validateErrorMessage(){
         Assert.assertTrue(

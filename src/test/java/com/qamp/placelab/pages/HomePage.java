@@ -8,6 +8,7 @@ public class HomePage {
     private final static String EXPECTED_USER_ROLE = "Group Admin";
     private final static By PLACELAB_LOGO = By.xpath("/html/body/div[2]/div[1]/div/a/img");
     private final static By CREATE_REPORT_DROPDOWN_MENU_BUTTON = By.xpath("//*[@id=\"create-menu\"]/i");
+    private final static By GO_TO_REPORTS_PAGE_LINK = By.id("queries-nav-item");
 
     private final WebDriver driver;
     public HomePage(final WebDriver webDriver) {
@@ -18,11 +19,9 @@ public class HomePage {
          Assert.assertEquals(actualUserRole ,EXPECTED_USER_ROLE, "Validate user role is correct");
          final boolean isPlaceLabLogoDisplayed = driver.findElement(PLACELAB_LOGO).isDisplayed();
          final boolean isCreateReportDropDownMenuButtonDisplayed = driver.findElement(CREATE_REPORT_DROPDOWN_MENU_BUTTON).isDisplayed();
-         try {
-             Thread.sleep(2000);
-         } catch (InterruptedException e) {
-             throw new RuntimeException(e);
-         }
      }
+    public void goToReportsPage() {
+        driver.findElement(GO_TO_REPORTS_PAGE_LINK).click();
+    }
 
 }
