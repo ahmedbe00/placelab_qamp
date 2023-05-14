@@ -1,6 +1,5 @@
 package com.qamp.placelab.test;
 
-import com.qamp.placelab.pages.HomePage;
 import com.qamp.placelab.pages.LoginPage;
 import com.qamp.placelab.utills.WebDriverSetup;
 import org.openqa.selenium.By;
@@ -9,11 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
-public class LoginWithValidCredentials {
+import java.util.UUID;
+
+public class LoginWithValidEmailInvalidPassword {
     private WebDriver driver;
     private SoftAssert softAssert = new SoftAssert();
     private LoginPage loginPage;
-    private HomePage homePage;
 
     @Parameters("browser")
     @BeforeTest
@@ -24,28 +24,25 @@ public class LoginWithValidCredentials {
         this.loginPage = new LoginPage(driver);
     }
 
-    @Parameters({"email", "password"})
-    @Test(description = "User is  able to log in with valid credentials ")
-    public void loginWithValidEmailPassword(final String email, final String password) {
+    @Parameters("email")
+    @Test(description = "User is not able to log in with invalid credentials ")
+    public void loginWithInValidEmailPassword(final String email) {
 
         //validate log in page
         loginPage.validateLogInPageContent();
 
         //enter credentials
-        loginPage.enterCredentials(email, password);
+        final String randomPassword = UUID.randomUUID().toString();
+        loginPage.enterCredentials(email, randomPassword);
+
+        //verify that user can't log with invalid credentials
+        loginPage.validateErrorMessage();
+        loginPage.validateLogInPageContent();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        // verify user role
-        this.homePage=new HomePage(driver);
-        homePage.validateHomePageContent();
-
-        //logout
-        loginPage.logout();
-
     }
 
     @AfterTest
@@ -53,4 +50,5 @@ public class LoginWithValidCredentials {
         driver.close();
     }
 }
+
 
